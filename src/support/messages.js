@@ -24,7 +24,6 @@ function toast (type, message, title) {
         case 'success':
             return toastr.success(message, title);
         case 'error':
-            console.log('entra');
             toastr.error(message, title);
             return;
         case 'warning':
