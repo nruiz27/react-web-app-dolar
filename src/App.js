@@ -4,6 +4,7 @@ import DolarPage from './pages/DolarPage';
 import { AppProvider } from './context/AppProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
+import { ToastContainer } from 'react-toastify';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Container style={{ marginTop: '30px', marginBottom: '30px'}}>
           <Route path="/" component={DolarPage}/>
         </Container>
+        <ToastContainer />
       </AppProvider>
     </div>
   );

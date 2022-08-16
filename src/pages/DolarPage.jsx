@@ -9,7 +9,8 @@ import Card from 'react-bootstrap/Card';
 import DateRangePicker from '../components/date-picker/DateRangePicker'
 import moment from 'moment';
 import BackdropLoader from '../components/BackdropLoader';
-import { showMessage } from '../support/messages'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function DolarPage()
 {
@@ -41,7 +42,7 @@ export default function DolarPage()
             setDolarValue(currentRow.index, value);
             handleOpen();
         } else {
-            showMessage('error', 'Es requerido ingresar un valor para editar.', 'Error');
+            toast.error('Es requerido ingresar un valor para editar.');
         }
     }
     

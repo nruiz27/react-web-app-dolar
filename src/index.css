@@ -126,7 +126,7 @@ th {
 }
 
 
-.toast-title {
+/* .toast-title {
   color: white !important;
   font-size: 1rem !important;
 }
@@ -189,3 +189,5 @@ font-weight: 300 !important;
       font-size: 13px !important;
   }
 }
+
+.toast-top-right{top:12px;right:12px} */
