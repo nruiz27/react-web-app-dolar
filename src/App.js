@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import Container from 'react-bootstrap/Container';
+import { Route } from 'wouter';
+import DolarPage from './pages/DolarPage';
+import { AppProvider } from './context/AppProvider';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppProvider>
+        <Container style={{ marginTop: '30px', marginBottom: '30px'}}>
+          <Route path="/" component={DolarPage}/>
+        </Container>
+      </AppProvider>
     </div>
   );
 }
-
-export default App;
