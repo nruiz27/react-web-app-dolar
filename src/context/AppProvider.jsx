@@ -6,15 +6,20 @@ export const AppProvider = ({ children }) =>
 {
     const [ data, setData ] = useState([]);
 
-    const setDolarValue = (dolarIndex, dolarValue) => {
+    const setDolarValue = (dolarDate, dolarValue) => {
         let newData = [ ...data ];
-        newData[dolarIndex].valor = dolarValue;
+        newData = newData.map((element) => {
+            if ( element.fecha === dolarDate ) {
+                element.valor = dolarValue;
+            }
+            return element;
+        });
         setData(newData);
     }
 
-    const deleteDolar = (dolarIndex) => {
+    const deleteDolar = (dolarDate) => {
         let newData = [ ...data ];
-        newData.splice(dolarIndex, 1);
+        newData = newData.filter(element => element.fecha !== dolarDate);
         setData(newData);
     }
 

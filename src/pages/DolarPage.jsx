@@ -29,7 +29,7 @@ export default function DolarPage()
     const handleEditPress = (event, index, data) => {
         event.preventDefault();
         setCurrentRow({
-            index,
+            date: data.fecha,
             value: data.valor
         });
         handleOpen();
@@ -39,7 +39,7 @@ export default function DolarPage()
         const { value } = formData;
 
         if ( value && value.trim().length > 0 ) {
-            setDolarValue(currentRow.index, value);
+            setDolarValue(currentRow.date, value);
             handleOpen();
         } else {
             toast.error('Es requerido ingresar un valor para editar.');
@@ -50,7 +50,7 @@ export default function DolarPage()
         event.preventDefault();
         sweetAlertDelete('¿Estas seguro que quieres eliminar el valor?').then((event) => {
             if ( event.value ) {
-                deleteDolar(index);
+                deleteDolar(data.fecha);
             }
         })
     }
