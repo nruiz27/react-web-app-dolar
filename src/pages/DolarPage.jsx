@@ -155,7 +155,7 @@ export default function DolarPage()
             type: 'text',
             name: 'valor',
             label: 'Valor',
-            info: 'Solo es permito ingresar números y el caracter "." solo una vez y no al inicio del valor.'
+            info: 'Solo es permito ingresar números del "0-9" y el caracter "." solo una vez y no al inicio del valor.'
         }
     ];
 
@@ -165,7 +165,7 @@ export default function DolarPage()
             type: 'dateRange',
             name: 'range',
             label: 'Rango de fechas',
-            info: 'Los rangos de fechas seleccionados se mostrarán en el gráfico y tabla de datos',
+            info: 'Los rangos de fechas seleccionados se mostrarán en el gráfico y tabla de datos.',
             minDate,
             maxDate,
         }
