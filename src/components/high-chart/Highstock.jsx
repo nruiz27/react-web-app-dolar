@@ -7,6 +7,13 @@ export default function Highstock(props)
 {
   const highChartRef = useRef(null);
   const [ options, setOptions ] = useState({
+    chart: {
+        type: 'spline',
+        scrollablePlotArea: {
+            minWidth: 700,
+            scrollPositionX: 1
+        }
+    },
     title: {
       text: props.title,
       align: 'left',
@@ -18,7 +25,7 @@ export default function Highstock(props)
       {
         data: [],
       }
-    ],
+    ]
   });
 
   useEffect(() => {
@@ -41,7 +48,7 @@ export default function Highstock(props)
   }, [props.data]);
 
   return (
-    <Card style={{ marginBottom: '30px' }}>
+    <Card className="graphic-card-container">
         <Card.Body>
           <HighchartsReact 
             highcharts={Highcharts}

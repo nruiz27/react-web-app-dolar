@@ -6,10 +6,7 @@ export default function DataTablePagination()
 {
     const { dtConfig, setPage } = useContext(DataTableContext);
 
-    const handlePageChange = (data) => {
-        const page = data.selected;
-        setPage(page);
-    }
+    const handlePageChange = ({ selected }) => setPage(selected);
 
     return (
         <>

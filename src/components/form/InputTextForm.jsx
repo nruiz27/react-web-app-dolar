@@ -16,9 +16,11 @@ export default function InputText(props)
     return (
         <input
             type="text"
+            id={props.name}
             className="form-control"
             value={value}
             placeholder={props.placeholder}
+            maxLength={255}
             onChange={handleChange}
         />
     )

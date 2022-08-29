@@ -5,7 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 export default function BackdropLoader (props) {
     return (
-        <Backdrop open={props.loading}>
+        <Backdrop className="backdrop-custom" open={props.loading}>
             <div className='loader-text'>
                 <CircularProgress color="inherit" />
             </div>

@@ -3,27 +3,22 @@ import { DataTableContext } from './DataTableContext';
 
 export const DataTableProvider = ({ children }) =>
 {
-    const [ dtConfig, setDtConfig ] = useState({
+    const defaultState = {
         data: [],
         dataPerPage: [],
         page: 0,
-        rowsPerPage: 5
-    });
+        rowsPerPage: 5,
+    };
+
+    const [ dtConfig, setDtConfig ] = useState(defaultState);
 
     const setData = (data) => {
         let newDtConfig = {...dtConfig};
         newDtConfig = {
             ...newDtConfig,
             data,
-        }
-        setDtConfig(newDtConfig);
-    }
-
-    const setDataPerPage = (dataPerPage) => {
-        let newDtConfig = {...dtConfig};
-        newDtConfig = {
-            ...newDtConfig,
-            dataPerPage,
+            page: defaultState['page'],
+            dataPerPage: data.slice((defaultState['page'] * newDtConfig.rowsPerPage), ((defaultState['page'] * newDtConfig.rowsPerPage) + newDtConfig.rowsPerPage)),
         }
         setDtConfig(newDtConfig);
     }
@@ -33,22 +28,17 @@ export const DataTableProvider = ({ children }) =>
         newDtConfig = {
             ...newDtConfig,
             page,
-        }
-        setDtConfig(newDtConfig);
-    }
-
-    const setRowsPerPage = (rowsPerPage) => {
-        let newDtConfig = {...dtConfig};
-        newDtConfig = {
-            ...newDtConfig,
-            rowsPerPage,
-            ['page']: 0,
+            dataPerPage: newDtConfig.data.slice((page * newDtConfig.rowsPerPage), ((page * newDtConfig.rowsPerPage) + newDtConfig.rowsPerPage))
         }
         setDtConfig(newDtConfig);
     }
 
     return (
-        <DataTableContext.Provider value={{ dtConfig, setData, setDataPerPage, setPage, setRowsPerPage }}>
+        <DataTableContext.Provider value={{ 
+            dtConfig,
+            setData,
+            setPage,
+        }}>
             {
                 children
             }

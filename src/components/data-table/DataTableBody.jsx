@@ -1,6 +1,8 @@
-import { useContext } from 'react';
+import { useContext, Fragment } from 'react';
 import Stack from 'react-bootstrap/Stack';
 import { DataTableContext } from './context/DataTableContext';
+import { v4 as uuidv4 } from 'uuid';
+import Tooltip from '../Tooltip';
 
 export default function DataTableBody({ columns })
 {
@@ -27,17 +29,26 @@ export default function DataTableBody({ columns })
                                                 >
                                                     <Stack direction="horizontal" gap={buttons.length} style={{ justifyContent: 'center' }}>
                                                         {
-                                                            (buttons && buttons.length > 0) && (buttons.map((button, buttonIndex) => {
+                                                            (buttons && buttons.length > 0) && (buttons.map((button, buttonIndex) => 
+                                                            {
+                                                                const tooltipId = uuidv4();
+
                                                                 return (
-                                                                    <button
-                                                                        key={buttonIndex}
-                                                                        type="button"
-                                                                        className={`btn btn-icon btn-md btn-clean`}
-                                                                        onClick={(event) => button.onPress(event, elementIndex, element)}
-                                                                    >
-                                                                        <i className={`la ${button.icon}`}></i>
-                                                                    </button>
-                                                                )
+                                                                    <Fragment key={buttonIndex}>
+                                                                        <button
+                                                                            type="button"
+                                                                            className={`btn btn-icon btn-md btn-clean dt-btn-clean`}
+                                                                            onClick={(event) => button.onPress(event, elementIndex, element)}
+                                                                            data-tip={button.title} 
+                                                                            data-for={tooltipId}
+                                                                        >
+                                                                            <i className={`la ${button.icon}`}></i>
+                                                                        </button>
+                                                                        <Tooltip
+                                                                            id={tooltipId}
+                                                                        />
+                                                                    </Fragment>
+                                                                );
                                                             }))
                                                         }
                                                     </Stack>

@@ -5,6 +5,13 @@ import moment from 'moment';
 
 import { datePickerConfig } from './dataPickerConfig';
 
+export const formatDatePickerResponse = (datepickerResponse) => {
+    return {
+        startDate: moment(datepickerResponse.startDate, 'DD/MM/yyyy').toDate(),
+        endDate: moment(datepickerResponse.endDate, 'DD/MM/yyyy').toDate(),
+    }
+}
+
 export default function DateRangePicker (props) {
     const [ val, setVal ] = useState(props.value);
     const [ dateWithFormat, setDateWithFormat ] = useState('');
@@ -13,19 +20,46 @@ export default function DateRangePicker (props) {
         to: null
     });
     
-    const defaultMinimumDate = {
-        year: 1900,
-        month: 1,
-        day: 1,
-    }
+    const defaultMinimumDate = (() => 
+    {
+        let defaultMin = {
+            year: 1900,
+            month: 1,
+            day: 1,
+        }
 
-    const defaultMaximumDate = (() => {
+        if ( props.minDate ) {
+            const min = moment(props.minDate, 'DD/MM/yyyy').toDate();
+            defaultMin = {
+                year: min.getFullYear(),
+                month: min.getMonth() + 1,
+                day: min.getDate(),
+            }
+        }
+
+        return defaultMin;
+    })();
+
+    const defaultMaximumDate = (() => 
+    {
         const maxDate = moment().add(100, 'years').toDate();
-        return {
+
+        let defaultMax ={
             year: maxDate.getFullYear(),
             month: (maxDate.getMonth() + 1),
             day: maxDate.getDate(),
-        };
+        }
+
+        if ( props.maxDate ) {
+            const min = moment(props.maxDate, 'DD/MM/yyyy').toDate();
+            defaultMax = {
+                year: min.getFullYear(),
+                month: min.getMonth() + 1,
+                day: min.getDate(),
+            }
+        }
+
+        return defaultMax;
     })();
 
     useEffect(() => {
@@ -91,7 +125,6 @@ export default function DateRangePicker (props) {
                     className={`dt-custom-input form-control ${ props.inputClassName ?  ` ${props.inputClassName}` : '' }`}
                     onChange={(event) => {event.preventDefault()}}
                     onKeyDown={props.onKeyDown !== undefined ? props.onKeyDown : (event) => event.preventDefault()}
-                    style={{zIndex: '0'}}
                 />
                 <div onClick={() => handleChange({ from: null, to: null })} className={val != null ? "date-picker-icon-trash active" : "fa fa-trash date-picker-icon-trash"} aria-hidden="true">
                     <svg height="20" width="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false">

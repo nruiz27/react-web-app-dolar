@@ -7,28 +7,23 @@ import Card from 'react-bootstrap/Card';
 
 import Table from 'react-bootstrap/Table';
 
-export default function DataTable({ title, config, data, rowsPerPage })
+export default function DataTable({ title, config, data, minWidth })
 {
-    const defaultRowPerPage = (rowsPerPage !== undefined) ? rowsPerPage : 5;
-    const { dtConfig, setData, setDataPerPage } = useContext(DataTableContext);
+    const { setData } = useContext(DataTableContext);
 
     useEffect(() => {
         setData(data);
     }, [data]);
 
-    useEffect(() => {
-        setDataPerPage(data.slice(dtConfig.page, dtConfig.page + defaultRowPerPage));
-    }, [dtConfig.data, dtConfig.page]);
-
     return (
-        <Card style={{ marginBottom: '30px' }}>
+        <Card className="dt-card-container">
             <Card.Body>
-                <h5 style={{ fontWeight: '400', fontSize: '18px' }}>{title}</h5>
-                <Table striped bordered hover size="sm" responsive="sm">
+                <h5 className="dt-card-title">{title}</h5>
+                <Table striped bordered hover size="sm" responsive="xl" style={{ minWidth: minWidth ? minWidth : '1190px'}}>
                     <DataTableHead columns={config.columns} />
                     <DataTableBody columns={config.columns} />
                 </Table>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+                <div className="dt-pagination-container">
                     <DataTablePagination rowsPerPage={config.rowsPerPage ? config.rowsPerPage : null}/>
                 </div>
             </Card.Body>
