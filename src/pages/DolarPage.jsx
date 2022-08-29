@@ -10,6 +10,7 @@ import moment from 'moment';
 import BackdropLoader from '../components/BackdropLoader';
 import { toast } from 'react-toastify';
 import ExternalFilter from '../components/ExternalFilter';
+import { validatePrice } from '../utils/stringUtils'
 
 export default function DolarPage()
 {
@@ -99,14 +100,13 @@ export default function DolarPage()
 
         if ( valor && valor.toString().trim().length > 0 ) 
         {
-            const re = /^[0-9]+([.][0-9]+)?$/g;
-
-            if ( !re.test(valor) ) {
+            if ( !validatePrice(valor) ) {
                 toast.error('El valor ingresado no es válido.');
                 return;
             }
 
             setDolarValue(currentRow.fecha, valor);
+            toast.success('Registro actualizado correctamente.');
             handleOpen();
         } else {
             toast.error('El campo valor es requerido.');
